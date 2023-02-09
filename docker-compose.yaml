@@ -1,0 +1,18 @@
+version: '3.7'
+services:
+  smtp:
+    build: .
+    image: aafloriangaudin/docker-postfix
+    container_name: postfix-relay
+    env_file:
+      - cdv.auteuil.org.env
+    hostname: pfx-vau01
+    ports:
+      - "50025:25"
+    volumes:
+      - 'spool:/var/spool/postfix'
+    restart: on-failure
+volumes:
+  spool:
+    driver: local
+    name: postfix_spool
