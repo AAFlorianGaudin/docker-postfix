@@ -9,6 +9,7 @@ services:
     hostname: pfx-vau01
     ports:
       - "50025:25"
+    dns: 172.24.0.5
     volumes:
       - 'spool:/var/spool/postfix'
     restart: on-failure
