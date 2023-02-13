@@ -55,10 +55,10 @@ postconf -e "relay_domains=" #interdire le relais à partir des domaines inconnu
 
 #configuration des restrictions pour l'utilisation de postfix
 postconf -e "smtpd_client_restrictions = permit_mynetworks, reject" #seuls les clients/réseaux approuvés peuvent se connecter au serveur SMTP
-postconf -e "smtpd_helo_restrictions = permit_mynetworks,reject_invalid_helo_hostname,reject" #seuls les clients/réseaux approuvés sont autorisés à envoyer une commande helo au serveur SMTP
+postconf -e "smtpd_helo_restrictions = permit_mynetworks, reject_invalid_helo_hostname, reject" #seuls les clients/réseaux approuvés sont autorisés à envoyer une commande helo au serveur SMTP
 postconf -e "smtpd_relay_restrictions = permit_mynetworks, reject" #seuls les clients/réseaux approuvés peuvent relayer à partir du serveur SMTP
-postconf -e "smtpd_sender_restrictions = check_sender_access lmdb:/etc/postfix/allowed_senders,reject" #seuls les expéditeurs approuvés peuvent relayer à partir du serveur SMTP
-postconf -e "smtpd_recipient_restrictions = reject_unknown_recipient_domain,reject_non_fqdn_recipient" #seuls les destinataires appartenant à un domaine valide peuvent recevoir des messages à partir de ce serveur SMTP
+postconf -e "smtpd_sender_restrictions = check_sender_access lmdb:/etc/postfix/allowed_senders, reject" #seuls les expéditeurs approuvés peuvent relayer à partir du serveur SMTP
+postconf -e "smtpd_recipient_restrictions = reject_unknown_recipient_domain, reject_non_fqdn_recipient" #seuls les destinataires appartenant à un domaine valide peuvent recevoir des messages à partir de ce serveur SMTP
 
 #configuration du client smtp servant de relais
 postconf -e "smtp_tls_loglevel = 1" #active l'activité complémentaire à la négociation TLS
@@ -89,7 +89,7 @@ chown root:root /etc/postfix/sasl_passwd.lmdb
 chmod u+rw /etc/postfix/sasl_passwd.lmdb
 
 #création du fichier contenant le seul expéditeur pouvant envoyer via le serveur smtp
-echo "$RELAY_USERNAME permit_mynetworks" >> /etc/postfix/allowed_senders
+echo "$RELAY_USERNAME OK" >> /etc/postfix/allowed_senders
 
 #changement de propriétaire
 chown root:root /etc/postfix/allowed_senders
