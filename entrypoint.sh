@@ -34,6 +34,7 @@ fi
 #configuration générale de postfix
 postconf -e "maillog_file=/dev/stdout" #affichage des logs dans stdout
 postconf -e "maximal_queue_lifetime=2d" #vide la queue tous les 2j
+postconf -e "bounce_queue_lifetime=2d" #temps maximum avant qu'un message en file d'attente soit considéré comme non-livrable, doit inférieur ou égal à maximal_queue_lifetime
 #postconf -e "maillog_file=/var/log/mail.log" #affichage des logs par défaut dans un fichier
 postconf -e "biff=no" #désactive les notifications UNIX via biff
 postconf -e "smtputf8_enable=no" #désactive le SMTPUTF8, Alpine ne le supporte pas dans ses binaires
