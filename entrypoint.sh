@@ -43,9 +43,6 @@ postconf -e "mydestination=" #désactive l'envoi de mail sur le réseau local
 postconf -e "smtpd_delay_reject=yes" #interdit les connexions s'il n'y a pas de commande helo
 postconf -e "smtpd_helo_required=yes" #force l'utilisation de la commande helo (peut éviter certaines tentatives de clients suspects)
 
-#configuration 
-postconf -e "smtpd_helo_restrictions=permit_mynetworks,reject_invalid_helo_hostname,permit" #
-
 #autorise uniquement les cleint/réseaux approuvés
 #il est possible d'indiquer une IP fixe (ex: 172.24.7.1) mais aussi un réseau complet (ex: 172.24.0.0/21)
 postconf -e "mynetworks=cidr:/etc/postfix/allowed_network_table"
