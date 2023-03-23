@@ -1,0 +1,22 @@
+version: '3.7'
+services:
+  pfx-vau01:
+    image: docker-postfix:latest
+    container_name: postfix-relay
+    hostname: postfix-relay
+    restart: always
+    ports:
+      - "25:25"
+    environment:
+      - TZ=Europe/Paris
+      - RELAY_DOMAIN=contoso.org
+      - RELAY_HOST=contoso-org.mail.protection.outlook.com
+      - RELAY_PORT=25
+      - RELAY_USERNAME=noreply@contoso.org
+      - RELAY_PASSWORD=contosoorgP@ssword
+      - POSTFIX_ALLOWED_NETWORKS=172.24.0.0/26 172.20.0.1 192.168.0.5
+    healthcheck:
+      test: "printf \"EHLO healthcheck\\n\" | nc 127.0.0.1 25 | grep -qE \"^220.*ESMTP Postfix\"" 
+      interval: 600s
+      timeout: 5s
+      retries: 2
